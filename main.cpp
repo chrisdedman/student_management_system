@@ -12,6 +12,7 @@
 #include "functions/display_individual.cpp"
 #include "functions/delete_database.cpp"
 #include "functions/single_record.cpp"
+#include "functions/delete_individual_record.cpp"
 using namespace std;
 //***************************************************************
 //    	Function declaration
@@ -24,6 +25,7 @@ void display_individual();
 void delete_database();
 void singleRecord();
 void editRecord();
+void delete_individual_record();
 /***************************************************************
          THE MAIN FUNCTION OF THE PROGRAM
 ***************************************************************/
@@ -63,10 +65,6 @@ int main()
 }
 /***************************************************************
         Function to modify record of file
-***************************************************************/
-
-/***************************************************************
-        Function to delete record of file
 ***************************************************************/
 
 /***************************************************************
