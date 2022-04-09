@@ -41,6 +41,7 @@ void singleRecord()
         case '3':
                   break;
         case '4':
+                  delete_individual_record();
                   break;
         case '5':
                   main();
