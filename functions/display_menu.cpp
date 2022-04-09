@@ -26,25 +26,6 @@ void display_menu()
     }
 
     cout << "\n\n\n\t\tDISPLAY ALL RECORD\n\n";
-    /*  while (getline(database, studentName))
-         {
-           database.ignore();
-           getline(database, studentClasses);
-           database.ignore();
-           database >> GPA;
-           cout << studentName << '\n'
-                << studentClasses << '\n'
-                << GPA << endl;
-           while (database >> breaking)
-             {
-               if (breaking == "////")
-               {
-                 break;
-               }
-               database.ignore();
-             }
-         }
-      */
 
     while (getline(database, studentName))
     {
