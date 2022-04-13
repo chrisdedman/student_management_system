@@ -16,7 +16,7 @@ In progress ...
 This project is licensed under the MIT License - see the [LICENSE](/LICENSE) file for details
 
 ## Author
-   * [Christopher Dedman-Rollet](https://twitter.com/DedmanRollet)
+   * [Christopher Dedman-Rollet](https://github.com/chrisdedman)
 
 ## Colaborator
    * [Zachery Rouzaud](https://github.com/MrRouzaud)
