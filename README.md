@@ -19,4 +19,4 @@ This project is licensed under the MIT License - see the [LICENSE](/LICENSE) fil
    * [Christopher Dedman-Rollet](https://twitter.com/DedmanRollet)
 
 ## Colaborator
-   * Zachery Rouzaud
+   * [Zachery Rouzaud](https://github.com/MrRouzaud)
