@@ -1,4 +1,12 @@
 /***************************************************************
+      HEADER FILE USED IN THE PROJECT
+***************************************************************/
+#include <fstream>
+#include <iomanip>
+#include <iostream>
+#include <string>
+using namespace std;
+/***************************************************************
         Function to delete single record of file
 ***************************************************************/
 void delete_individual_record()
