@@ -49,7 +49,7 @@ void writeMultipleStudent()
         count++;
 
         // Divider between students
-        data << "\n////\n"
+        data << "#"
              << endl;
         cin.ignore();
 
