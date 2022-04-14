@@ -14,7 +14,7 @@ void delete_individual_record()
     ifstream data;
     string recordLine;
 
-    data.open("database.dat", ios::in);
+    data.open("database.dat", ios_base::in);
     if (!data)
     {
         cout << "No record found!" << endl;
@@ -22,44 +22,11 @@ void delete_individual_record()
         cin.get();
         return;
     }
-
     ofstream temporary;
     string student_record;
     string studentClass;
     string studentGPA;
-
-    temporary.open("temporary.dat", ofstream::out);
-
-    cin.ignore();
-    cout << "Which Student Record do you want to remove?";
-    cout << "Name: ";
-    getline(cin, student_record);
-    student_record = ("Name: " + student_record);
-    
-    while(getline(data, recordLine))
-    {
-        getline(data, studentClass);
-        getline(data, studentGPA);
-      
-      if (recordLine == student_record)
-      {
-        while(getline(data, recordLine))
-        {
-          if (recordLine == "#")
-          {
-            break;
-          }
-          else
-          {
-            temporary << "";
-          }
-        }
-        temporary << "";
-      }
-      else
-      {
-        temporary << recordLine << '\n' << studentClass << '\n' << studentGPA << endl;
-      }string studentSeparator;
+    string studentSeparator;
     
 
     temporary.open("temporary.dat", ofstream::out);
@@ -91,7 +58,8 @@ void delete_individual_record()
       {
         temporary << recordLine << '\n' << studentClass << '\n' << studentGPA << '\n' << studentSeparator << endl;
       }
-    }
+      
+		}
 
     temporary.close();
     data.close();
