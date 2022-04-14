@@ -16,6 +16,7 @@ void display_menu()
     string studentName;
     string studentClasses;
     string studentGPA;
+    string studentSeparator;
 
     database.open("database.dat", ios_base::in);
     if (!database)
@@ -33,9 +34,11 @@ void display_menu()
     {
         getline(database, studentClasses);
         getline(database, studentGPA);
+        getline(database, studentSeparator);
         cout << studentName << '\n'
              << studentClasses << '\n'
-             << studentGPA << endl;
+             << studentGPA << '\n' 
+             << "" << endl;
     }
 
     cin.get();

@@ -17,6 +17,7 @@ void display_individual()
     string studentClasses;
     string studentID;
     string studentGPA;
+    string studentSeparator;
     double GPA;
 
     database.open("database.dat", ios_base::in);
@@ -40,12 +41,14 @@ void display_individual()
     {
         getline(database, studentClasses);
         getline(database, studentGPA);
+        getline(database, studentSeparator);
 
         if ((studentName.compare(studentID)) == 0)
         {
             cout << studentName << '\n'
                  << studentClasses << '\n'
                  << studentGPA << endl;
+                 
             database.close();
             cout << "\nPress enter to return ...";
             cin.get();
