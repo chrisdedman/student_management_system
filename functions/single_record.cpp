@@ -10,6 +10,7 @@ using namespace std;
 //    	Function declaration
 //**************************************************************/
 int main();
+void delete_individual_record();
 /***************************************************************
         Function navigating between single records
 ***************************************************************/
