@@ -33,9 +33,10 @@ void delete_individual_record()
     temporary.open("temporary.dat", ofstream::out);
 
     cin.ignore();
-    cout << "Who's file would you want to remove? [Enter Student's Name]\n[CASE SENSITIVE]: ";
-    getline(cin, student_record);
-    student_record = ("Name: " + student_record);
+    string student_name;
+    cout << "Who's record would you want to remove? [Enter Student's Name]\n[CASE SENSITIVE]: ";
+    getline(cin, student_name);
+    student_record = ("Name: " + student_name);
     
     while(getline(data, recordLine))
     {
@@ -64,6 +65,7 @@ void delete_individual_record()
     data.close();
     remove("database.dat");
     rename("temporary.dat", "database.dat");
+    cout << student_name << " Record Deleted!" << endl;
     cout << "\nPress enter to return ...";
     cin.get();
 }
