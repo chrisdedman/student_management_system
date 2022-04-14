@@ -41,7 +41,7 @@ void write_database()
     data << "GPA: " << studentGPA << endl;
 
     // Divider between students
-    data << "\n////\n"
+    data << "#"
          << endl;
 
     data.close();
