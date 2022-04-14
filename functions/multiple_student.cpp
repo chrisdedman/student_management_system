@@ -22,16 +22,18 @@ void writeMultipleStudent()
     if (!data)
     {
         cout << "No record found!" << endl;
+        cout << "\nPress enter to return ...";
+        cin.ignore();
         cin.get();
         return;
     }
 
-    cout << "\n\n\t\tENTER STUDENT'S DETAILS\n\n"
-         << endl;
     cout << "How many record do you want to add? ";
     cin >> numberOfRecord;
     cin.ignore();
 
+    cout << "\n\n\t\tENTER STUDENT'S DETAILS\n\n"
+         << endl;
     do
     {
         cout << "Name: ";
@@ -49,8 +51,7 @@ void writeMultipleStudent()
         count++;
 
         // Divider between students
-        data << "#"
-             << endl;
+        data << "#" << endl;
         cin.ignore();
 
     } while (count != numberOfRecord);

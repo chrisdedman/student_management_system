@@ -20,10 +20,14 @@ void write_database()
     if (!data)
     {
         cout << "No record found!" << endl;
+        cout << "\nPress enter to return ...";
+        cin.ignore();
         cin.get();
         return;
     }
+
     cin.ignore();
+
     cout << "\n\n\t\tENTER STUDENT'S DETAILS\n\n"
          << endl;
 
@@ -41,8 +45,7 @@ void write_database()
     data << "GPA: " << studentGPA << endl;
 
     // Divider between students
-    data << "#"
-         << endl;
+    data << "#" << endl;
 
     data.close();
     cout << "Record Saved... Press any key to continue ...";

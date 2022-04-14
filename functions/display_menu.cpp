@@ -21,6 +21,8 @@ void display_menu()
     if (!database)
     {
         cout << "No record found!" << endl;
+        cout << "\nPress enter to return ...";
+        cin.ignore();
         cin.get();
         return;
     }

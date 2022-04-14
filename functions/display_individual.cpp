@@ -23,6 +23,8 @@ void display_individual()
     if (!database)
     {
         cout << "No record found!" << endl;
+        cout << "\nPress enter to return ...";
+        cin.ignore();
         cin.get();
         return;
     }

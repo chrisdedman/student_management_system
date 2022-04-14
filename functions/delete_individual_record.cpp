@@ -18,22 +18,22 @@ void delete_individual_record()
     if (!data)
     {
         cout << "No record found!" << endl;
+        cout << "\nPress enter to return ...";
         cin.ignore();
         cin.get();
         return;
     }
+
     ofstream temporary;
     string student_record;
     string studentClass;
     string studentGPA;
     string studentSeparator;
     
-
     temporary.open("temporary.dat", ofstream::out);
 
     cin.ignore();
-    cout << "Which Student Record do you want to remove?";
-    cout << "\nName: ";
+    cout << "Who's file would you want to remove? [Enter Student's Name]\n[CASE SENSITIVE]: ";
     getline(cin, student_record);
     student_record = ("Name: " + student_record);
     
@@ -58,7 +58,6 @@ void delete_individual_record()
       {
         temporary << recordLine << '\n' << studentClass << '\n' << studentGPA << '\n' << studentSeparator << endl;
       }
-      
 		}
 
     temporary.close();
