@@ -364,7 +364,7 @@ void display_grades()
         // cout << *(itr+6);
 
         string::iterator GPA = studentGPA.end();
-        cout << setw(25) << left << studentName << setw(4) << right;
+        cout << setw(26) << left << studentName << setw(4) << right;
         cout << *(GPA - 4) << *(GPA - 3) << *(GPA - 2) << *(GPA - 1) << endl;
     }
 
