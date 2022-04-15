@@ -53,7 +53,7 @@ void multipleRecord()
     int option;
     do
     {
-        system("clear");
+        cout << "\033[2J\033[1;1H"; // Clear the screen
         cout << "\t\t\tProject in progress...\n";
         cout << "====== STUDENT DATABASE MANAGEMENT SYSTEM ======\n"
              << endl;
@@ -99,7 +99,7 @@ void singleRecord()
     char selection;
     do
     {
-        system("clear");
+        cout << "\033[2J\033[1;1H"; // Clear the screen
         cout << "\t\t\tProject in progress...\n";
         cout << "====== STUDENT DATABASE MANAGEMENT SYSTEM ======\n"
              << endl;
