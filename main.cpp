@@ -13,6 +13,7 @@
 #include "functions/delete_database.cpp"
 #include "functions/single_record.cpp"
 #include "functions/delete_individual_record.cpp"
+#include "functions/display_gpa.cpp"
 using namespace std;
 //***************************************************************
 //    	Function declaration
@@ -26,6 +27,7 @@ void delete_database();
 void singleRecord();
 void editRecord();
 void delete_individual_record();
+void display_grades();
 /***************************************************************
          THE MAIN FUNCTION OF THE PROGRAM
 ***************************************************************/
@@ -65,10 +67,6 @@ int main()
 }
 /***************************************************************
         Function to modify record of file
-***************************************************************/
-
-/***************************************************************
-        Function to display all students grade report
 ***************************************************************/
 
 /***************************************************************

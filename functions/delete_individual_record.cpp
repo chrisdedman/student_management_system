@@ -36,7 +36,7 @@ void delete_individual_record()
     string student_name;
     cout << "Who's record would you want to remove? [Enter Student's Name]\n[CASE SENSITIVE]: ";
     getline(cin, student_name);
-    student_record = ("Name: " + student_name);
+    student_record = ("Name:  " + student_name);
     
     while(getline(data, recordLine))
     {

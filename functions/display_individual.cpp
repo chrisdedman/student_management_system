@@ -34,7 +34,7 @@ void display_individual()
     cin.ignore();
     getline(cin, theStudent);
 
-    studentID = "Name: " + theStudent;
+    studentID = "Name:  " + theStudent;
     cout << "\n\n\t\tDISPLAY INDIVIDUAL RECORD\n\n"
          << endl;
     while (getline(database, studentName))

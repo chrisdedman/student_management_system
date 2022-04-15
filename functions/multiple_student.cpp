@@ -5,6 +5,7 @@
 #include <iomanip>
 #include <iostream>
 #include <string>
+#include <iomanip>
 using namespace std;
 /***************************************************************
         Function to write multiple students in file
@@ -38,16 +39,16 @@ void writeMultipleStudent()
     {
         cout << "Name: ";
         getline(cin, student_record);
-        data << "Name: " << student_record << endl;
+        data << setw(7) << left << "Name: " << student_record << endl;
 
         cout << "Class: ";
         getline(cin, studentClass);
-        data << "Classes: " << studentClass << endl;
+        data << setw(7) << left << "Class: " << studentClass << endl;
 
         cout << "Overall GPA: ";
         cin >> studentGPA;
         data << fixed << setprecision(2);
-        data << "GPA: " << studentGPA << endl;
+        data << setw(7) << left << "GPA: " << studentGPA << endl;
         count++;
 
         // Divider between students

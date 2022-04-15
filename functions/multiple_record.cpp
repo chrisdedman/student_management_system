@@ -12,12 +12,14 @@ using namespace std;
 int main();
 void display_menu();
 void delete_database();
+void display_grades();
 /***************************************************************
         Function navigating between multiple records
 ***************************************************************/
 void multipleRecord()
 {
     char selection;
+    int option;
     do
     {
         system("clear");
@@ -40,7 +42,10 @@ void multipleRecord()
             writeMultipleStudent();
             break;
         case '2':
-            display_menu();
+            cout << "\n[1]Display All Record / [2]Display Student GPA" << endl;
+            cin >> option;
+            if (option == 1) display_menu();
+            else if (option == 2) display_grades();
             break;
         case '3':
             break;
