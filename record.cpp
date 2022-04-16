@@ -473,11 +473,7 @@ void delete_individual_record()
     data.close();
     remove("database.dat");
     rename("temporary.dat", "database.dat");
-    if (student_record != recordLine) cout << student_name << " isn't in the database..." << endl;
-    else
-    {
-        cout << student_name << " Record Deleted!" << endl;
-    }
+    cout << student_name << " Record Deleted!" << endl;
     cout << "\nPress enter to return ...";
     cin.get();
 }
@@ -592,7 +588,7 @@ void modify_individual_record()
     data.close();
     remove("database.dat");
     rename("temporary.dat", "database.dat");
-    if (student_record != recordLine) cout << student_record << " isn't in the database..." << endl;
+    if (student_record != recordLine) cout << student_name << " isn't in the database..." << endl;
     else
     {
         cout << student_name << " Record Edited!" << endl;
