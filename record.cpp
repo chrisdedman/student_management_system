@@ -399,7 +399,7 @@ void display_grades()
     }
 
     // get the average of all student's GPA.
-    average = sum / counter;
+    average = sum / studentCounter;
     cout << "\nAverage / Highest / Lowest\n"
          << "-------   -------   ------" << endl;
     cout << "\nGPAs average: " << average << endl;
