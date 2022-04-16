@@ -352,21 +352,59 @@ void display_grades()
         return;
     }
 
+    // Variable Declaration
+    double sum, average;
+    double highestGPA = 0.00, lowestGPA = 5.00;
+    string highestName, lowestName;
+    int studentCounter = 0;
+
     cout << "\n\n\t\tDISPLAY All GPAs\n\n"
          << endl;
+
+    cout << setw(25) << left << "Name" << setw(4) << left << "GPA" << endl;
+    cout << setw(25) << left << "----" << setw(4) << left << "---" << endl;
+
     while (getline(database, studentName))
     {
+        string recordName;
+        string stringGPA;
+        double convertedGPA;
+
         getline(database, studentClasses);
         getline(database, studentGPA);
         getline(database, studentSeparator);
+        studentCounter++;
 
-        // for(string::iterator itr=studentName.begin();itr!=studentName.end();++itr)
-        // cout << *(itr+6);
+        // retrieve only Names, and GPAs from the database.
+        recordName.append(studentName, 7);
+        stringGPA.append(studentGPA, 7);
+        
+        // convert the GPA string into double.
+        convertedGPA = atof(stringGPA.c_str());
+        if (highestGPA < convertedGPA) 
+        {
+            highestGPA = double(convertedGPA);
+            highestName = recordName;
+        }
+        if (lowestGPA > convertedGPA) 
+        {
+            lowestGPA = double(convertedGPA);
+            lowestName = recordName;
+        }
 
-        string::iterator GPA = studentGPA.end();
-        cout << setw(26) << left << studentName << setw(4) << right;
-        cout << *(GPA - 4) << *(GPA - 3) << *(GPA - 2) << *(GPA - 1) << endl;
+        // print the name and GPA of all students from the database
+        cout << setw(25) << left << recordName << setprecision(2) << fixed << setw(4) << right << convertedGPA << endl;
+
+        // get the sum of all the student's GPA
+        sum = sum + convertedGPA;
+
     }
+
+    // get the average of all student's GPA.
+    average = sum / counter;
+    cout << "\nGPAs average: " << average << endl;
+    cout << "Highest GPA: " << highestName << " / " << highestGPA << endl;
+    cout << "Lowest GPA: " << lowestName << " / " << lowestGPA << endl;
 
     database.close();
     cin.ignore();
