@@ -61,10 +61,9 @@ void multipleRecord()
         cout << "\t\t\t< MULTIPLE RECORDS MENU >\n"
              << "\t\t1. Add Records\n"
              << "\t\t2. List Records\n"
-             << "\t\t3. Edit Records\n"
-             << "\t\t4. Delete Records\n"
-             << "\t\t5. Return\n"
-             << "\n\tPlease enter your choice [1-5]\n"
+             << "\t\t3. Delete Records\n"
+             << "\t\t4. Return\n"
+             << "\n\tPlease enter your choice [1-4]\n"
              << endl;
         cin >> selection;
         switch (selection)
@@ -81,15 +80,13 @@ void multipleRecord()
                 display_grades();
             break;
         case '3':
-            break;
-        case '4':
             delete_database();
             break;
-        case '5':
+        case '4':
             startProgram();
         default : cout << "Error!";
         }
-    } while (selection != 5);
+    } while (selection != 4);
 }
 /***************************************************************
         Function navigating between single records
@@ -122,6 +119,7 @@ void singleRecord()
             display_individual();
             break;
         case '3':
+            modify_individual_record();
             break;
         case '4':
             delete_individual_record();
@@ -475,7 +473,11 @@ void delete_individual_record()
     data.close();
     remove("database.dat");
     rename("temporary.dat", "database.dat");
-    cout << student_name << " Record Deleted!" << endl;
+    if (student_record != recordLine) cout << student_name << " isn't in the database..." << endl;
+    else
+    {
+        cout << student_name << " Record Deleted!" << endl;
+    }
     cout << "\nPress enter to return ...";
     cin.get();
 }
@@ -514,7 +516,90 @@ void delete_database()
 /***************************************************************
         Function to modify record of file
 ***************************************************************/
+void modify_individual_record()
+{
+    ifstream data;
+    string recordLine;
 
+    data.open("database.dat", ios_base::in);
+    if (!data)
+    {
+        cout << "No record found!" << endl;
+        cout << "\nPress enter to return ...";
+        cin.ignore();
+        cin.get();
+        return;
+    }
+
+    ofstream temporary;
+    string student_record;
+    string studentClass;
+    string studentGPA;
+    string studentSeparator;
+
+    temporary.open("temporary.dat", ofstream::out);
+
+    cin.ignore();
+    string student_name;
+    
+    cout << "Who's record would you want to modify? [Enter Student's Name]\n[CASE SENSITIVE]: ";
+    getline(cin, student_name);
+    student_record = ("Name:  " + student_name);
+
+
+    while (getline(data, recordLine))
+    {
+        
+        getline(data, studentClass);
+        getline(data, studentGPA);
+        getline(data, studentSeparator);
+
+        if (recordLine == student_record)
+        {
+            if (recordLine == studentSeparator)
+            {
+                break;
+            }
+            else
+            {
+                cout << "Name: ";
+                getline(cin, student_record);
+                temporary << setw(7) << left << "Name: " << student_record << endl;
+
+                cout << "Class: ";
+                getline(cin, studentClass);
+                temporary << setw(7) << left << "Class: " << studentClass << endl;
+
+                cout << "Overall GPA: ";
+                cin >> studentGPA;
+                temporary << fixed << setprecision(2);
+                temporary << setw(7) << left << "GPA: " << studentGPA << endl;
+
+                // Divider between students
+                temporary << "#" << endl;
+            }
+        }
+        else
+        {
+            temporary << recordLine << '\n'
+                      << studentClass << '\n'
+                      << studentGPA << '\n'
+                      << studentSeparator << endl;
+        }
+    }
+
+    temporary.close();
+    data.close();
+    remove("database.dat");
+    rename("temporary.dat", "database.dat");
+    if (student_record != recordLine) cout << student_record << " isn't in the database..." << endl;
+    else
+    {
+        cout << student_name << " Record Edited!" << endl;
+    }
+    cout << "\nPress enter to return...";
+    cin.get();
+}
 /***************************************************************
         END OF PROJECT
 ***************************************************************/
