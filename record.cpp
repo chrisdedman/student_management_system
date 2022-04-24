@@ -74,7 +74,7 @@ void multipleRecord()
             writeMultipleStudent();
             break;
         case '2':
-            cout << "\n\t[1]Display All Record / [2]Display Student GPA" << endl;
+            cout << "\n\t[1]Display All Record /\n\t[2]Display Student GPA" << endl;
             cin >> option;
             if (option == 1)
                 display_menu();
@@ -214,7 +214,8 @@ void writeMultipleStudent()
 
     cout << "\n\n\t\tENTER STUDENT'S DETAILS\n\n"<< endl;
     cout << "\t\t-----------------------\n"<< endl;
-    do
+
+    while (count != numberOfRecord)
     {
         cout << "ID #: ";
         cin >> id;
@@ -239,8 +240,11 @@ void writeMultipleStudent()
         data << "#" << endl;
         cin.ignore();
         cout << endl;
-
-    } while (count != numberOfRecord);
+    }
+    if (count == 0)
+    {
+        return;
+    }
 
     data.close();
     cout << "Record Saved... Press any key to continue ...";
