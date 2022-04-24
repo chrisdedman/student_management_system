@@ -11,6 +11,7 @@ using namespace std;
         Function that start the program
 ***************************************************************/
 void startProgram()
+
 {
     char choice;
 
