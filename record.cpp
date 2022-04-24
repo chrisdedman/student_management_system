@@ -17,14 +17,14 @@ void startProgram()
     do
     {
         cout << "\033[2J\033[1;1H"; // Clear the screen
-        cout << "\t\t\tProject in progress...\n";
         cout << "====== STUDENT DATABASE MANAGEMENT SYSTEM ======\n"
              << endl;
 
         cout << "\t\t\t< MAIN MENU >\n"
              << "\t\t1. Multiple Records\n"
              << "\t\t2. Single Record\n"
-             << "\t\t3. Exit\n"
+             << "\t\t3. Total Record\n"
+             << "\t\t4. Exit\n"
              << "\n\tPlease enter your choice [1-3]\n"
              << endl;
         cin >> choice;
@@ -38,11 +38,13 @@ void startProgram()
             singleRecord();
             break;
         case '3':
+            countStudent();
+            break;
+        case '4':
             exit(1);
-        default:
-            cout << "Error!";
+        default : cout << "Error!";
         }
-    } while (choice != 3);
+    } while (true);
 }
 /***************************************************************
         Function navigating between multiple records
@@ -54,7 +56,6 @@ void multipleRecord()
     do
     {
         cout << "\033[2J\033[1;1H"; // Clear the screen
-        cout << "\t\t\tProject in progress...\n";
         cout << "====== STUDENT DATABASE MANAGEMENT SYSTEM ======\n"
              << endl;
 
@@ -86,7 +87,7 @@ void multipleRecord()
             startProgram();
         default : cout << "Error!";
         }
-    } while (selection != 4);
+    } while (true);
 }
 /***************************************************************
         Function navigating between single records
@@ -97,7 +98,6 @@ void singleRecord()
     do
     {
         cout << "\033[2J\033[1;1H"; // Clear the screen
-        cout << "\t\t\tProject in progress...\n";
         cout << "====== STUDENT DATABASE MANAGEMENT SYSTEM ======\n"
              << endl;
 
@@ -129,7 +129,7 @@ void singleRecord()
         default:
             cout << "Error!";
         }
-    } while (selection != 5);
+    } while (true);
 }
 /***************************************************************
         Function to write a single student in file
@@ -137,6 +137,7 @@ void singleRecord()
 void write_database()
 {
     ofstream data;
+    int id;
     string student_record;
     string studentClass;
     double studentGPA;
@@ -155,19 +156,26 @@ void write_database()
 
     cout << "\n\n\t\tENTER STUDENT'S DETAILS\n\n"
          << endl;
+    cout << "\t\t-----------------------\n"
+         << endl;
+
+    cout << "ID #: ";
+    cin >> id;
+    data << id << endl;
+    cin.ignore();
 
     cout << "Name: ";
     getline(cin, student_record);
-    data << setw(7) << left << "Name: " << student_record << endl;
+    data << student_record << endl;
 
     cout << "Class: ";
     getline(cin, studentClass);
-    data << setw(7) << left << "Class: " << studentClass << endl;
+    data << studentClass << endl;
 
     cout << "Overall GPA: ";
     cin >> studentGPA;
     data << fixed << setprecision(2);
-    data << setw(7) << left << "GPA: " << studentGPA << endl;
+    data << studentGPA << endl;
 
     // Divider between students
     data << "#" << endl;
@@ -186,6 +194,7 @@ void writeMultipleStudent()
     int count = 0; // Counter for number of multiple record to add into the database
     string student_record;
     string studentClass;
+    int id;
     double studentGPA;
 
     data.open("database.dat", ios_base::app); // ios_base::app <--- this add data at the end of the opened file
@@ -202,22 +211,27 @@ void writeMultipleStudent()
     cin >> numberOfRecord;
     cin.ignore();
 
-    cout << "\n\n\t\tENTER STUDENT'S DETAILS\n\n"
-         << endl;
+    cout << "\n\n\t\tENTER STUDENT'S DETAILS\n\n"<< endl;
+    cout << "\t\t-----------------------\n"<< endl;
     do
     {
+        cout << "ID #: ";
+        cin >> id;
+        data << id << endl;
+        cin.ignore();
+
         cout << "Name: ";
         getline(cin, student_record);
-        data << setw(7) << left << "Name: " << student_record << endl;
+        data << student_record << endl;
 
         cout << "Class: ";
         getline(cin, studentClass);
-        data << setw(7) << left << "Class: " << studentClass << endl;
+        data << studentClass << endl;
 
         cout << "Overall GPA: ";
         cin >> studentGPA;
         data << fixed << setprecision(2);
-        data << setw(7) << left << "GPA: " << studentGPA << endl;
+        data << studentGPA << endl;
         count++;
 
         // Divider between students
@@ -253,17 +267,21 @@ void display_menu()
         return;
     }
 
-    cout << "\n\n\n\t\tDISPLAY ALL RECORD\n\n";
+    cout << "\n\n\n\t\tDISPLAY ALL RECORD\n";
+    cout << "\t\t------------------\n"
+         << endl;
 
-    while (getline(database, studentName))
+    while (getline(database, studentID))
     {
+        getline(database, studentName);
         getline(database, studentClasses);
         getline(database, studentGPA);
         getline(database, studentSeparator);
-        cout << studentName << '\n'
+        cout << studentID << '\n' 
+             << studentName << '\n'
              << studentClasses << '\n'
              << studentGPA << '\n'
-             << "" << endl;
+             << "---------" << endl;
     }
 
     cin.get();
@@ -295,24 +313,27 @@ void display_individual()
         return;
     }
 
-    cout << "Who's file would you want to see [Enter Student's Name]\n[CASE SENSITIVE]: ";
+    cout << "Who's file would you want to see [Student ID]: ";
     cin.ignore();
     getline(cin, theStudent);
 
-    studentID = "Name:  " + theStudent;
-    cout << "\n\n\t\tDISPLAY INDIVIDUAL RECORD\n\n"
+    //studentID = "Name:  " + theStudent;
+    cout << "\n\n\t\tDISPLAY INDIVIDUAL RECORD"
          << endl;
-    while (getline(database, studentName))
+    cout << "\t\t-------------------------\n" << endl;
+    while (getline(database, studentID))
     {
+        getline(database, studentName);
         getline(database, studentClasses);
         getline(database, studentGPA);
         getline(database, studentSeparator);
 
-        if ((studentName.compare(studentID)) == 0)
+        if ((studentID.compare(theStudent)) == 0)
         {
-            cout << studentName << '\n'
-                 << studentClasses << '\n'
-                 << studentGPA << endl;
+            cout << setw(9) << left << "ID #: " << studentID << '\n'
+                 << setw(9) << left << "Name: " << studentName << '\n'
+                 << setw(9) << left << "Classes: " << studentClasses << '\n'
+                 << setw(13) << left << "Overall GPA: " << studentGPA << endl;
 
             database.close();
             cout << "\nPress enter to return ...";
@@ -332,7 +353,6 @@ void display_individual()
 void display_grades()
 {
     ifstream database;
-    string theStudent;
     string studentName;
     string studentClasses;
     string studentID;
@@ -356,42 +376,38 @@ void display_grades()
     string highestName, lowestName;
     int studentCounter = 0;
 
-    cout << "\n\n\t\tDISPLAY All GPAs\n\n"
+    cout << "\n\n\t\tDISPLAY All GPAs"
+         << endl;
+    cout << "\t\t----------------\n"
          << endl;
 
     cout << setw(25) << left << "Name" << setw(4) << left << "GPA" << endl;
     cout << setw(25) << left << "----" << setw(4) << left << "---" << endl;
 
-    while (getline(database, studentName))
+    while (getline(database, studentID))
     {
-        string recordName;
-        string stringGPA;
         double convertedGPA;
-
+        getline(database, studentName);
         getline(database, studentClasses);
         getline(database, studentGPA);
         getline(database, studentSeparator);
         studentCounter++;
-
-        // retrieve only Names, and GPAs from the database.
-        recordName.append(studentName, 7);
-        stringGPA.append(studentGPA, 7);
         
         // convert the GPA string into double.
-        convertedGPA = atof(stringGPA.c_str());
+        convertedGPA = atof(studentGPA.c_str());
         if (highestGPA < convertedGPA) 
         {
             highestGPA = double(convertedGPA);
-            highestName = recordName;
+            highestName = studentName;
         }
         if (lowestGPA > convertedGPA) 
         {
             lowestGPA = double(convertedGPA);
-            lowestName = recordName;
+            lowestName = studentName;
         }
 
         // print the name and GPA of all students from the database
-        cout << setw(25) << left << recordName << setprecision(2) << fixed << setw(4) << right << convertedGPA << endl;
+        cout << setw(25) << left << studentName << setprecision(2) << fixed << setw(4) << right << convertedGPA << endl;
 
         // get the sum of all the student's GPA
         sum = sum + convertedGPA;
@@ -417,7 +433,6 @@ void display_grades()
 void delete_individual_record()
 {
     ifstream data;
-    string recordLine;
 
     data.open("database.dat", ios_base::in);
     if (!data)
@@ -430,7 +445,9 @@ void delete_individual_record()
     }
 
     ofstream temporary;
-    string student_record;
+    string student_id;
+    string studentID;
+    string studentName;
     string studentClass;
     string studentGPA;
     string studentSeparator;
@@ -438,20 +455,19 @@ void delete_individual_record()
     temporary.open("temporary.dat", ofstream::out);
 
     cin.ignore();
-    string student_name;
-    cout << "Who's record would you want to remove? [Enter Student's Name]\n[CASE SENSITIVE]: ";
-    getline(cin, student_name);
-    student_record = ("Name:  " + student_name);
-
-    while (getline(data, recordLine))
+    cout << "Who's record would you want to remove? [Enter Student ID#]: ";
+    getline(cin, student_id);
+    
+    while (getline(data, studentID))
     {
+        getline(data, studentName);
         getline(data, studentClass);
         getline(data, studentGPA);
         getline(data, studentSeparator);
 
-        if (recordLine == student_record)
+        if (studentID == student_id)
         {
-            if (recordLine == studentSeparator)
+            if (studentID == studentSeparator)
             {
                 break;
             }
@@ -459,10 +475,13 @@ void delete_individual_record()
             {
                 temporary << "";
             }
+
+            cout << "Record ID# " << student_id << " Deleted !" << endl;
         }
         else
         {
-            temporary << recordLine << '\n'
+            temporary << studentID << '\n'
+                      << studentName << '\n'
                       << studentClass << '\n'
                       << studentGPA << '\n'
                       << studentSeparator << endl;
@@ -473,7 +492,7 @@ void delete_individual_record()
     data.close();
     remove("database.dat");
     rename("temporary.dat", "database.dat");
-    cout << student_name << " Record Deleted!" << endl;
+
     cout << "\nPress enter to return ...";
     cin.get();
 }
@@ -515,7 +534,7 @@ void delete_database()
 void modify_individual_record()
 {
     ifstream data;
-    string recordLine;
+    string studentID;
 
     data.open("database.dat", ios_base::in);
     if (!data)
@@ -528,7 +547,8 @@ void modify_individual_record()
     }
 
     ofstream temporary;
-    string student_record;
+    string studentName;
+    string student_id;
     string studentClass;
     string studentGPA;
     string studentSeparator;
@@ -536,40 +556,41 @@ void modify_individual_record()
     temporary.open("temporary.dat", ofstream::out);
 
     cin.ignore();
-    string student_name;
     
-    cout << "Who's record would you want to modify? [Enter Student's Name]\n[CASE SENSITIVE]: ";
-    getline(cin, student_name);
-    student_record = ("Name:  " + student_name);
+    cout << "Who's record would you want to modify? [Enter Student's ID#]: ";
+    getline(cin, student_id);
 
-
-    while (getline(data, recordLine))
+    while (getline(data, studentID))
     {
-        
+        getline(data, studentName);
         getline(data, studentClass);
         getline(data, studentGPA);
         getline(data, studentSeparator);
 
-        if (recordLine == student_record)
+        if (studentID == student_id)
         {
-            if (recordLine == studentSeparator)
+            if (studentID == studentSeparator)
             {
                 break;
             }
             else
             {
+                cout << "ID#: ";
+                getline(cin, studentID);
+                temporary << studentID << endl;
+
                 cout << "Name: ";
-                getline(cin, student_record);
-                temporary << setw(7) << left << "Name: " << student_record << endl;
+                getline(cin, studentName);
+                temporary << studentName << endl;
 
                 cout << "Class: ";
                 getline(cin, studentClass);
-                temporary << setw(7) << left << "Class: " << studentClass << endl;
+                temporary << studentClass << endl;
 
                 cout << "Overall GPA: ";
                 cin >> studentGPA;
                 temporary << fixed << setprecision(2);
-                temporary << setw(7) << left << "GPA: " << studentGPA << endl;
+                temporary << studentGPA << endl;
 
                 // Divider between students
                 temporary << "#" << endl;
@@ -577,7 +598,8 @@ void modify_individual_record()
         }
         else
         {
-            temporary << recordLine << '\n'
+            temporary << studentID << '\n'
+                      << studentName << '\n'
                       << studentClass << '\n'
                       << studentGPA << '\n'
                       << studentSeparator << endl;
@@ -588,10 +610,10 @@ void modify_individual_record()
     data.close();
     remove("database.dat");
     rename("temporary.dat", "database.dat");
-    if (student_record != recordLine) cout << student_name << " isn't in the database..." << endl;
+    if (student_id != studentID) cout << student_id << " isn't in the database..." << endl;
     else
     {
-        cout << student_name << " Record Edited!" << endl;
+        cout << student_id << " Record Edited!" << endl;
     }
     cout << "\nPress enter to return...";
     cin.get();
@@ -599,7 +621,46 @@ void modify_individual_record()
 /***************************************************************
         Function that count number of students
 ***************************************************************/
+void countStudent()
+{
+    ifstream database;
+    string studentID;
+    string studentName;
+    string studentClasses;
+    string studentGPA;
+    string studentSeparator;
+    int studentCount = 0;
 
+    database.open("database.dat", ios_base::in);
+    if (!database)
+    {
+        cout << "No record found!" << endl;
+        cout << "\nPress enter to return ...";
+        cin.ignore();
+        cin.get();
+        return;
+    }
+
+    while (getline(database, studentID))
+    {
+        getline(database, studentName);
+        getline(database, studentClasses);
+        getline(database, studentGPA);
+        getline(database, studentSeparator);
+        studentCount++;
+    }
+
+    cout << "\n\n\t\tNUMBER OF STUDENTS" << endl;
+    cout << "\t\t------------------\n" << endl;
+    if (studentCount < 1) cout << "Currently no record in the database." << endl;
+    if (studentCount == 1) cout << "Currently " << studentCount << " student's record is in the database." << endl;
+    if (studentCount > 1) cout << "Currently " << studentCount << " student's record are in the database." << endl;
+
+    database.close();
+    cin.ignore();
+    cout << "\nPress enter to return ...";
+    cin.get();
+}
 /***************************************************************
         END OF PROJECT
 ***************************************************************/

@@ -15,5 +15,6 @@ void singleRecord();
 void delete_individual_record();
 void display_grades();
 void modify_individual_record();
+void countStudent();
 
 #endif
