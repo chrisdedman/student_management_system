@@ -5,6 +5,7 @@
 #include <iomanip>
 #include <iostream>
 #include <string>
+#include <vector>
 #include "record.h"
 using namespace std;
 /***************************************************************
@@ -25,7 +26,7 @@ void startProgram()
              << "\t\t2. Single Record\n"
              << "\t\t3. Total Record\n"
              << "\t\t4. Exit\n"
-             << "\n\tPlease enter your choice [1-3]\n"
+             << "\n\tPlease enter your choice [1-4]\n"
              << endl;
         cin >> choice;
 
@@ -257,6 +258,11 @@ void display_menu()
     string studentGPA;
     string studentSeparator;
 
+    vector<string> vstudentID;
+    vector<string> vstudentName;
+    vector<string> vstudentClasses;
+    vector<string> vstudentGPA;
+
     database.open("database.dat", ios_base::in);
     if (!database)
     {
@@ -273,17 +279,25 @@ void display_menu()
 
     while (getline(database, studentID))
     {
+        vstudentID.push_back(studentID);
         getline(database, studentName);
+        vstudentName.push_back(studentName);
         getline(database, studentClasses);
+        vstudentClasses.push_back(studentClasses);
         getline(database, studentGPA);
+        vstudentGPA.push_back(studentGPA);
         getline(database, studentSeparator);
-        cout << studentID << '\n' 
-             << studentName << '\n'
-             << studentClasses << '\n'
-             << studentGPA << '\n'
-             << "---------" << endl;
     }
 
+    for (int i = 0; i < vstudentID.size();i++)
+    {
+        cout << setw(9) << left << "ID #: " << vstudentID[i] << '\n'
+             << setw(9) << left << "Name: " << vstudentName[i] << '\n'
+             << setw(9) << left << "Class: " << vstudentClasses[i] << '\n'
+             << setw(13) << left << "Overall GPA: " << vstudentGPA[i] << '\n'
+             << "------------" << endl;
+    }
+    
     cin.get();
     database.close();
     cout << "\nPress enter to return ...";
@@ -303,6 +317,11 @@ void display_individual()
     string studentSeparator;
     double GPA;
 
+    vector<string> vstudentID;
+    vector<string> vstudentName;
+    vector<string> vstudentClasses;
+    vector<string> vstudentGPA;
+
     database.open("database.dat", ios_base::in);
     if (!database)
     {
@@ -313,29 +332,37 @@ void display_individual()
         return;
     }
 
+    while (getline(database, studentID))
+    {
+        vstudentID.push_back(studentID);
+        getline(database, studentName);
+        vstudentName.push_back(studentName);
+        getline(database, studentClasses);
+        vstudentClasses.push_back(studentClasses);
+        getline(database, studentGPA);
+        vstudentGPA.push_back(studentGPA);
+        getline(database, studentSeparator);
+    }
+    database.close();
+
     cout << "Who's file would you want to see [Student ID]: ";
     cin.ignore();
     getline(cin, theStudent);
 
-    //studentID = "Name:  " + theStudent;
     cout << "\n\n\t\tDISPLAY INDIVIDUAL RECORD"
          << endl;
-    cout << "\t\t-------------------------\n" << endl;
-    while (getline(database, studentID))
+    cout << "\t\t-------------------------\n"
+         << endl;
+
+    for (int i = 0; i < vstudentID.size();i++)
     {
-        getline(database, studentName);
-        getline(database, studentClasses);
-        getline(database, studentGPA);
-        getline(database, studentSeparator);
-
-        if ((studentID.compare(theStudent)) == 0)
+        if (theStudent == vstudentID[i])
         {
-            cout << setw(9) << left << "ID #: " << studentID << '\n'
-                 << setw(9) << left << "Name: " << studentName << '\n'
-                 << setw(9) << left << "Classes: " << studentClasses << '\n'
-                 << setw(13) << left << "Overall GPA: " << studentGPA << endl;
+            cout << setw(9) << left << "ID #: " << vstudentID[i] << '\n'
+                << setw(9) << left << "Name: " << vstudentName[i] << '\n'
+                << setw(9) << left << "Classes: " << vstudentClasses[i] << '\n'
+                << setw(13) << left << "Overall GPA: " << vstudentGPA[i] << endl;
 
-            database.close();
             cout << "\nPress enter to return ...";
             cin.get();
             return;
