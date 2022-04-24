@@ -345,7 +345,7 @@ void display_individual()
     }
     database.close();
 
-    cout << "Who's file would you want to see [Student ID]: ";
+    cout << "Who's file would you want to see [Student ID or Student Name]: ";
     cin.ignore();
     getline(cin, theStudent);
 
@@ -362,6 +362,17 @@ void display_individual()
                 << setw(9) << left << "Name: " << vstudentName[i] << '\n'
                 << setw(9) << left << "Classes: " << vstudentClasses[i] << '\n'
                 << setw(13) << left << "Overall GPA: " << vstudentGPA[i] << endl;
+
+            cout << "\nPress enter to return ...";
+            cin.get();
+            return;
+        }
+        if (theStudent == vstudentName[i])
+        {
+            cout << setw(9) << left << "ID #: " << vstudentID[i] << '\n'
+                 << setw(9) << left << "Name: " << vstudentName[i] << '\n'
+                 << setw(9) << left << "Classes: " << vstudentClasses[i] << '\n'
+                 << setw(13) << left << "Overall GPA: " << vstudentGPA[i] << endl;
 
             cout << "\nPress enter to return ...";
             cin.get();
