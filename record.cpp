@@ -667,10 +667,6 @@ void countStudent()
 {
     ifstream database;
     string studentID;
-    string studentName;
-    string studentClasses;
-    string studentGPA;
-    string studentSeparator;
     int studentCount = 0;
 
     database.open("database.dat", ios_base::in);
@@ -685,18 +681,15 @@ void countStudent()
 
     while (getline(database, studentID))
     {
-        getline(database, studentName);
-        getline(database, studentClasses);
-        getline(database, studentGPA);
-        getline(database, studentSeparator);
         studentCount++;
     }
+    // divide the counter by 5 (5 is the number of category (id, name, gpa, classes, separator) to isolate 1 student)
+    studentCount /= 5;
 
     cout << "\n\n\t\tNUMBER OF STUDENTS" << endl;
     cout << "\t\t------------------\n" << endl;
     if (studentCount < 1) cout << "Currently no record in the database." << endl;
-    if (studentCount == 1) cout << "Currently " << studentCount << " student's record is in the database." << endl;
-    if (studentCount > 1) cout << "Currently " << studentCount << " student's record are in the database." << endl;
+    if (studentCount > 0) cout << "Currently " << studentCount << " student's record in the database." << endl;
 
     database.close();
     cin.ignore();

@@ -9,8 +9,6 @@ using namespace std;
 ***************************************************************/
 int main()
 {
-  startProgram();
-  return 0;
+    startProgram();
+    return 0;
 }
-
-// Made by Chris and Zac
