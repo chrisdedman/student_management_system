@@ -8,7 +8,9 @@
 #include <vector>
 #include "record.h"
 using namespace std;
-
+/***************************************************************
+        Function that structure the program
+***************************************************************/
 struct StudentInfo
 {
     string studentID;
@@ -306,10 +308,9 @@ void display_grades()
     vector<StudentInfo> students = getData();
 
     // Variable Declaration
-    double sum, average;
-    double highestGPA = 0.00, lowestGPA = 5.00;
-    string highestName, lowestName;
     int studentCounter = 0;
+    double sum, average, highestGPA = 0.00, lowestGPA = 5.00;
+    string highestName, lowestName;
 
     cout << "\n\n\t\tDISPLAY All GPAs"
          << endl;
@@ -405,18 +406,8 @@ void delete_individual_record()
 ***************************************************************/
 void delete_database()
 {
-    // ifstream data;
     char deleteDatabase;
 
-    // data.open("database.dat");
-    // if (!data)
-    // {
-    //     cout << "No record found!" << endl;
-    //     cout << "\nPress enter to return ...";
-    //     cin.ignore();
-    //     cin.get();
-    //     return;
-    // }
     cout << "Do you want to delete all records? [Y/n] ";
     cin >> deleteDatabase;
     if (deleteDatabase == 'y' || deleteDatabase == 'Y')
@@ -428,7 +419,6 @@ void delete_database()
         return;
 
     cin.get();
-    // data.close();
     cout << "\nPress enter to return ...";
     cin.get();
 }
@@ -437,21 +427,10 @@ void delete_database()
 ***************************************************************/
 void modify_individual_record()
 {
-    ifstream data;
-
-    data.open("database.dat", ios_base::in);
-    if (!data)
-    {
-        cout << "No record found!" << endl;
-        cout << "\nPress enter to return ...";
-        cin.ignore();
-        cin.get();
-        return;
-    }
+    vector<StudentInfo> students = getData();
 
     ofstream temporary;
     string student_id;
-    StudentInfo info;
 
     temporary.open("temporary.dat", ofstream::out);
 
@@ -460,38 +439,32 @@ void modify_individual_record()
     cout << "Who's record would you want to modify? [Enter Student's ID#]: ";
     getline(cin, student_id);
 
-    while (getline(data, info.studentID))
+    for(int i = 0; i < students.size(); i++)
     {
-        getline(data, info.studentName);
-        getline(data, info.studentClass);
-        data >> info.studentGPA;
-        data.ignore();
-        getline(data, info.studentSeparator);
-
-        if (info.studentID == student_id)
+        if (students[i].studentID == student_id)
         {
-            if (info.studentID == info.studentSeparator)
+            if (students[i].studentID == students[i].studentSeparator)
             {
                 break;
             }
             else
             {
                 cout << "ID#: ";
-                getline(cin, info.studentID);
-                temporary << info.studentID << endl;
+                getline(cin, students[i].studentID);
+                temporary << students[i].studentID << endl;
 
                 cout << "Name: ";
-                getline(cin, info.studentName);
-                temporary << info.studentName << endl;
+                getline(cin, students[i].studentName);
+                temporary << students[i].studentName << endl;
 
                 cout << "Class: ";
-                getline(cin, info.studentClass);
-                temporary << info.studentClass << endl;
+                getline(cin, students[i].studentClass);
+                temporary << students[i].studentClass << endl;
 
                 cout << "Overall GPA: ";
-                cin >> info.studentGPA;
+                cin >> students[i].studentGPA;
                 temporary << fixed << setprecision(2);
-                temporary << info.studentGPA << endl;
+                temporary << students[i].studentGPA << endl;
 
                 // Divider between students
                 temporary << "#" << endl;
@@ -499,23 +472,20 @@ void modify_individual_record()
         }
         else
         {
-            temporary << info.studentID << '\n'
-                      << info.studentName << '\n'
-                      << info.studentClass << '\n'
-                      << info.studentGPA << '\n'
-                      << info.studentSeparator << endl;
+            temporary << students[i].studentID << '\n'
+                      << students[i].studentName << '\n'
+                      << students[i].studentClass << '\n'
+                      << students[i].studentGPA << '\n'
+                      << students[i].studentSeparator << endl;
         }
+        
     }
 
     temporary.close();
-    data.close();
+    
     remove("database.dat");
     rename("temporary.dat", "database.dat");
-    if (student_id != info.studentID) cout << student_id << " isn't in the database..." << endl;
-    else
-    {
-        cout << student_id << " Record Edited!" << endl;
-    }
+
     cout << "\nPress enter to return...";
     cin.get();
 }
