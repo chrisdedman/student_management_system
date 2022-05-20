@@ -20,51 +20,13 @@ struct StudentInfo
     double studentGPA;
 };
 /***************************************************************
-        Function that start the program
-***************************************************************/
-void startProgram()
-{
-    char choice;
-
-    do
-    {
-        cout << "\033[2J\033[1;1H"; // Clear the screen
-        cout << "====== STUDENT DATABASE MANAGEMENT SYSTEM ======\n"
-             << endl;
-
-        cout << "\t\t\t< MAIN MENU >\n"
-             << "\t\t1. Multiple Records\n"
-             << "\t\t2. Single Record\n"
-             << "\t\t3. Total Record\n"
-             << "\t\t4. Exit\n"
-             << "\n\tPlease enter your choice [1-4]\n"
-             << endl;
-        cin >> choice;
-
-        switch (choice)
-        {
-        case '1':
-            multipleRecord();
-            break;
-        case '2':
-            singleRecord();
-            break;
-        case '3':
-            countStudent();
-            break;
-        case '4':
-            exit(1);
-        default : cout << "Error!";
-        }
-    } while (true);
-}
-/***************************************************************
         Function navigating between multiple records
 ***************************************************************/
 void multipleRecord()
 {
     char selection;
     int option;
+    bool run = true;
     do
     {
         cout << "\033[2J\033[1;1H"; // Clear the screen
@@ -96,10 +58,11 @@ void multipleRecord()
             delete_database();
             break;
         case '4':
-            startProgram();
+            run = false;
+            break;
         default : cout << "Error!";
         }
-    } while (true);
+    } while (run == true);
 }
 /***************************************************************
         Function navigating between single records
@@ -107,6 +70,7 @@ void multipleRecord()
 void singleRecord()
 {
     char selection;
+    bool run = true;
     do
     {
         cout << "\033[2J\033[1;1H"; // Clear the screen
@@ -137,11 +101,11 @@ void singleRecord()
             delete_individual_record();
             break;
         case '5':
-            startProgram();
-        default:
-            cout << "Error!";
+            run = false;
+            break;
+        default: cout << "Error!";
         }
-    } while (true);
+    } while (run == true);
 }
 /***************************************************************
         Function to write student in file
@@ -202,10 +166,8 @@ void writeMultipleStudent()
         write_database();
         count++;
     }
-    if (count == 0)
-    {
-        return;
-    }
+
+    if (count == 0) return;
 
     cout << "Record Saved... Press any key to continue ...";
     cin.get();
@@ -220,10 +182,7 @@ vector<StudentInfo> getData()
     ifstream database;
 
     database.open("database.dat", ios_base::in);
-    if (!database)
-    {
-        cout << "No record found!" << endl;
-    }
+    if (!database) cout << "No record found!" << endl;
 
     while (getline(database, info.studentID))
     {
@@ -372,14 +331,9 @@ void delete_individual_record()
     {
         if (students[i].studentID == student_id)
         {
-            if (students[i].studentID == students[i].studentSeparator)
-            {
-                break;
-            }
-            else
-            {
-                temporary << "";
-            }
+            if (students[i].studentID == students[i].studentSeparator) break;
+
+            else temporary << "";
 
             cout << "Record ID# " << student_id << " Deleted !" << endl;
         }
@@ -415,8 +369,7 @@ void delete_database()
         remove("database.dat");
         cout << "Database Deleted!" << endl;
     }
-    else
-        return;
+    else return;
 
     cin.get();
     cout << "\nPress enter to return ...";
@@ -443,10 +396,8 @@ void modify_individual_record()
     {
         if (students[i].studentID == student_id)
         {
-            if (students[i].studentID == students[i].studentSeparator)
-            {
-                break;
-            }
+            if (students[i].studentID == students[i].studentSeparator) break;
+
             else
             {
                 cout << "ID#: ";
@@ -501,10 +452,7 @@ void countStudent()
     for(int i = 0; i < students.size(); i++)
     {
         studentCount++;
-        if(i == students.size()-1)
-        {
-            break;
-        }
+        if(i == students.size()-1) break;
     }
 
     cout << "\n\n\t\tNUMBER OF STUDENTS" << endl;

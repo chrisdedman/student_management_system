@@ -4,7 +4,7 @@
 #ifndef RECORD_H
 #define RECORD_H
 
-void startProgram() ;
+void startProgram();
 void multipleRecord();
 void writeMultipleStudent();
 void write_database();
